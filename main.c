@@ -44,10 +44,10 @@ int agregar_estanteria() {
     printf("Ingrese categoría de la estanteria: ");
     gets(categ_estant);
     
-    strncpy(base_de_datos[indice_estant_agreg][0][0], letra_estant, 15);//copia count caracteres de string2 en string1
-    sntrcpy(base_de_datos[indice_estant_agreg][0][1], categ_estant, 15);//formatea y almacena una serie de caracteres y valores en el almacenamiento intermediode la matriz.
-    strncpy(base_de_datos[indice_estant_agreg][0][2], "-", 15);
-    strncpy(base_de_datos[indice_estant_agreg][0][3], "-", 15);
+    strcpy(base_de_datos[indice_estant_agreg][0][0], letra_estant);//copia count caracteres de string2 en string1
+    sntcpy(base_de_datos[indice_estant_agreg][0][1], categ_estant);//formatea y almacena una serie de caracteres y valores en el almacenamiento intermediode la matriz.
+    strcpy(base_de_datos[indice_estant_agreg][0][2], "-");
+    strcpy(base_de_datos[indice_estant_agreg][0][3], "-");
     return 0;
 }
 

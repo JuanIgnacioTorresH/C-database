@@ -6,22 +6,21 @@
 // Variable numero de estanterias (input)
 int num_estant;
 
-//Inicialización de base de datos
-char base_de_datos [num_estant][6][4][15];
+//Inicialización de base de datos (maximo de 10 estanterias)
+char base_de_datos[10][6][4][15];;
 int opcion;
 
 // Variables declaradas para la funcion de agregar estanterias
-int categ_estant;
+char categ_estant[15];
 char letra_estant[1];
-int indice_estant_agreg;
-indice_estant_agreg = 0;
+int indice_estant_agreg = 0;
 
 // Variables declaradas para la funcion de agregar paquetes
 int indice_paquete;
-int paquete_full;
-int paquete_fecha;
-int paquete_nombre;
-int paquete_categ;
+char paquete_full[15];
+char paquete_fecha[15];
+char paquete_nombre[15];
+char paquete_categ[15];
 
 // Variables declaradas para la funcion de eliminar estanterias
 int indice_estant_elim;
@@ -40,34 +39,35 @@ int a, b, c;
 int agregar_estanteria() {
     // Pido dos valores de indentificacion el estanteria que van en el indice 0 y le asigno un valor a los restantes
     // Notar que el máximo de caracteres posibles a escribir por string es 15
-    printf("Ingrese letra asignada de la estantería");
-    gets(letra_estant);
-    printf("Ingrese categoría de la estanteria");
+    printf("Ingrese letra asignada de la estantería: ");
+    gets(letra_estant)
+    printf("Ingrese categoría de la estanteria: ");
     gets(categ_estant);
-
-    strcpy(base_de_datos[indice_estant_agreg][0][0], letra_estant );
-    strcpy(base_de_datos[indice_estant_agreg][0][1], categ_estant );
-    strcpy(base_de_datos[indice_estant_agreg][0][2], "-" );
-    strcpy(base_de_datos[indice_estant_agreg][0][3], "-" );
+    
+    strncpy(base_de_datos[indice_estant_agreg][0][0], letra_estant, 15);//copia count caracteres de string2 en string1
+    sntrcpy(base_de_datos[indice_estant_agreg][0][1], categ_estant, 15);//formatea y almacena una serie de caracteres y valores en el almacenamiento intermediode la matriz.
+    strncpy(base_de_datos[indice_estant_agreg][0][2], "-", 15);
+    strncpy(base_de_datos[indice_estant_agreg][0][3], "-", 15);
+    return 0;
 }
 
 int agregar_paquete(int full){
     // Notar que el máximo de caracteres posibles a escribir por string es 15
     // Main pasa el valor de base_full de la estanteria que me pide el usuario y se fija si esta llena
     if (full >= 5) {
-        printf("Ya no hay espacio para almacenar mas paquetes en esta estanteria");
+        printf("Ya no hay espacio para almacenar mas paquetes en esta estanteria\n");
     }
     else {
         //Si no esta lleno, pide cada categoria y rellena cada seccion del paquete
-        printf("Ingrese categoría");
+        printf("Ingrese categoría \n");
         gets(paquete_categ);
-        strcopy(base_de_datos[indice_paquete][full][0], paquete_categ);
-        printf("Ingrese nombre");
+        strcpy(base_de_datos[indice_paquete][full][0], paquete_categ);
+        printf("Ingrese nombre \n");
         gets(paquete_nombre);
-        strcopy(base_de_datos[indice_paquete][full][1], paquete_nombre);
-        printf("Ingrese fecha de caducidad");
+        strcpy(base_de_datos[indice_paquete][full][1], paquete_nombre);
+        printf("Ingrese fecha de caducidad \n");
         gets(paquete_fecha);
-        strcopy(base_de_datos[indice_paquete][full][2], paquete_fecha);
+        strcpy(base_de_datos[indice_paquete][full][2], paquete_fecha);
     }
 }
 
@@ -119,7 +119,7 @@ int porcentaje(){
 int main(){
     // Pide la cantidad de estanterias que usara la base de datos
     // Como hay un bucle abajo, solo es una vez
-    printf ("Ingrese la cantidad de estanterias del almacen");
+    printf ("Ingrese la cantidad de estanterias del almacen ");
     scanf("%d", &num_estant);
 
 
@@ -129,17 +129,17 @@ int main(){
     for (a=0; a< num_estant-1; a++){
         base_full[a] = 0;
     }
-    
+
 
     //Bucle
     while (1){
         // Pide la accion que debe ejecutar y ejecuta la funcion correspondiente (ver cada funcion arriba)
-        printf ("Elija 1 para agregar estanteria");
-        printf ("Elija 2 para agregar paquete");
-        printf ("Elija 3 para eliminar estanteria");
-        printf ("Elija 4 para eliminar paquete");
-        printf ("Elija 5 para listado");
-        printf ("Elija 6 para porcentaje de espacio ocupado");
+        printf ("Elija 1 para agregar estanteria \n");
+        printf ("Elija 2 para agregar paquete \n");
+        printf ("Elija 3 para eliminar estanteria \n");
+        printf ("Elija 4 para eliminar paquete \n");
+        printf ("Elija 5 para listado \n");
+        printf ("Elija 6 para porcentaje de espacio ocupado \n");
         scanf("%d", &opcion);
         if (opcion == 1){
             agregar_estanteria();
@@ -147,12 +147,12 @@ int main(){
             indice_estant_agreg++;
         }
         else if(opcion == 2){
-            printf("Ingrese la estanteria a la que quiere agregar el paquete");
+            printf("Ingrese la estanteria a la que quiere agregar el paquete ");
             gets(indice_paquete);
             agregar_paquete(base_full[indice_paquete]);
             // Paquete_full cuenta para saber cuando se llena un paquete
             base_full[indice_paquete]++;
-        } 
+        }
         else if(opcion == 3){
             eliminar_estanteria();
             // Copie un valor hacia atras todo el array para sacar la estanteria que borre del array que trackea
@@ -175,7 +175,7 @@ int main(){
             porcentaje();
         }
         else{
-            printf("Error");
+            printf("Error\n");
         }
     }
     return 0;
